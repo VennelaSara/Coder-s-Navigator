@@ -1,0 +1,193 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url('nav.jpg') no-repeat center center fixed; /* Add your background image URL */
+    background-size: cover;
+    color: #fff;
+}
+
+header {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.destination-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.destination-form label {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.destination-form input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.destination-form button {
+    background: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.destination-form button:hover {
+    background: #0056b3;
+    transform: translateY(-3px);
+}
+
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    margin-top: 150px; /* Adjust to create space below header */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    color: #cce7ff;
+    transform: translateY(-3px);
+}
+
+main {
+    margin-top: 60px; /* Adjust to create space below header and above form */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preferences-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px; 
+    backdrop-filter: blur(10px); 
+    animation: slideIn 1s ease-in-out;
+}
+
+.preferences-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.weather-form label {
+    display: block;
+    margin-top: 10px;
+    color: #f0f0f0;
+}
+
+.weather-form input[type="number"],
+.weather-form input[type="text"],
+.weather-form input[type="checkbox"],
+.weather-form select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.weather-form input[type="number"]:focus,
+.weather-form input[type="text"]:focus,
+.weather-form input[type="checkbox"]:focus,
+.weather-form select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+.weather-form button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+.weather-form button:hover {
+    background: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* .dynamic-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png') repeat;
+    animation: moveBackground 20s linear infinite;
+} */
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

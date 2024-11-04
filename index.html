@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coder's Navigator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Coder's Navigator</h1>
+        <form action="/recommend" method="post" class="destination-form">
+            <label for="destination">Destination Spot:</label>
+            <input type="text" id="destination" name="destination" required placeholder="Enter destination">
+            <button type="submit">Get Route Recommendations</button>
+        </form>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="dynamic-background"></div>
+
+    <main>
+        <div class="preferences-container">
+            <form action="/recommend" method="post" class="weather-form">
+                <h2>User Preferences</h2>
+
+                <label for="temp_min">Preferred Minimum Temperature (°C):</label>
+                <input type="number" id="temp_min" name="temp_min" required>
+
+                <label for="temp_max">Preferred Maximum Temperature (°C):</label>
+                <input type="number" id="temp_max" name="temp_max" required>
+
+                <label for="weather">Preferred Weather:</label>
+                <select id="weather" name="weather">
+                    <option value="sunny">Sunny</option>
+                    <option value="rainy">Rainy</option>
+                    <option value="monsoon">Monsoon</option>
+                    <option value="spring">Spring</option>
+                </select>
+
+                <label for="traffic">Preferred Traffic:</label>
+                <select id="traffic" name="traffic">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <label for="preferences">Preferred Places:</label>
+                <select id="preferences" name="preferences">
+                    <!-- Options to be populated from Maps API -->
+                    <option value="Sceneric">Sceneric</option>
+                    <option value="Mountain">Mountain</option>
+                    <option value="Historic">Historic</option>
+                </select>
+
+                <label for="public_transit">Preferred Public Transit:</label>
+                <select id="public_transit" name="public_transit">
+                    <!-- Options to be populated from Maps API -->
+                    <option value="Hospital">Hospital</option>
+                    <option value="Shopping Center">Shopping Center</option>
+                    <option value="Restaurent">Restaurent</option>
+                    <option value="Gas stations">Gas Stations</option>
+                    <option value="Parks">Parks</option>
+                </select>
+
+                <label for="route_safety">Route Safety:</label>
+                <select id="route_safety" name="route_safety">
+                    <option value="good">Good</option>
+                    <option value="best">Best</option>
+                    <option value="risk">Safe</option>
+                </select>
+            </form>
+        </div>
+    </main>
+
+    <script>
+       // Handle form submission
+        document.getElementById('navigation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            let formData = new FormData(this);
+
+            // Send POST request to Flask backend
+            fetch('http://localhost:5000/recommend', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display recommendations in the UI
+                let recommendationsContainer = document.getElementById('recommendations-container');
+                recommendationsContainer.innerHTML = '';
+
+                data.recommendations.forEach(recommendation => {
+                    let recommendationElement = document.createElement('div');
+                    recommendationElement.innerHTML = `
+                        <h3>Destination: ${recommendation.Destination}</h3>
+                        <p>Weather: Temperature ${recommendation.Weather.Temperature}°C, ${recommendation.Weather.Condition}</p>
+                        <p>Traffic: ${recommendation.Traffic}</p>
+                        <p>Places of Interest: ${JSON.stringify(recommendation['Places of Interest'])}</p>
+                        <p>Public Transit: ${JSON.stringify(recommendation['Public Transit'])}</p>
+                        <p>Accident Prediction: ${recommendation['Accident Prediction']}</p>
+                    `;
+                    recommendationsContainer.appendChild(recommendationElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }); 
+    </script>
+</body>
+</html>
